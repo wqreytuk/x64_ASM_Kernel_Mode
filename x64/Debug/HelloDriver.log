@@ -1,0 +1,23 @@
+﻿  Building 'HelloDriver' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Debug\HelloDriver.inf
+  Stamping [Version] section with DriverVer=08/09/2022,16.24.50.403
+  Driver.c
+  HelloDriver.vcxproj -> C:\driver_projects\HelloDriver\x64\Debug\HelloDriver.sys
+  Done Adding Additional Store
+  Successfully signed: C:\driver_projects\HelloDriver\x64\Debug\HelloDriver.sys
+  
+  Driver is a Universal Driver.
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\driver_projects\HelloDriver\x64\Debug\HelloDriver\hellodriver.cat
+  Done Adding Additional Store
+  Successfully signed: C:\driver_projects\HelloDriver\x64\Debug\HelloDriver\hellodriver.cat
+  
