@@ -19,6 +19,7 @@ extern void TestFunction(void);
 // both DRIVER_INITIALIZE and EVT_WDF_DRIVER_DEVICE_ADD are function type with parameter and return value declared, see this:  https://blog.csdn.net/ma_de_hao_mei_le/article/details/126246225
 DRIVER_INITIALIZE DriverEntry;
 EVT_WDF_DRIVER_DEVICE_ADD KmdfHelloWorldEvtDeviceAdd;
+VOID KmdfHelloWorldEvtDriverUnload(IN WDFDRIVER Driver);
 
 // then DriverEntry function
 // this is the main function in user mode code
@@ -46,6 +47,9 @@ _nt DriverEntry(
 	// it will be called automatically if certain event comes
 	WDF_DRIVER_CONFIG_INIT(&config,
 		KmdfHelloWorldEvtDeviceAdd);
+	// register an unload function
+	config.EvtDriverUnload = KmdfHelloWorldEvtDriverUnload;
+
 
 	// at last, we create driver object
 	status = WdfDriverCreate(
@@ -85,11 +89,18 @@ _nt KmdfHelloWorldEvtDeviceAdd(
 	// print some thing in debugger so we know that this function is executed
 	KdPrintEx((DPFLTR_IHVDRIVER_ID, DPFLTR_INFO_LEVEL, "KmdfHelloWorld: KmdfHelloWorldEvtDeviceAdd\n"));
 
-	TestFunction();
-
 	_nt status = WdfDeviceCreate(
 		&DeviceInit,
 		WDF_NO_OBJECT_ATTRIBUTES,
 		&hDevice);
 	return status;
+}
+
+
+
+VOID KmdfHelloWorldEvtDriverUnload(IN WDFDRIVER Driver) {
+	UNREFERENCED_PARAMETER(Driver);
+	// execute test asm code here, so my target won't crash until driver unload
+	// in that case, I can make a snapshot before driver unload
+	TestFunction();
 }
